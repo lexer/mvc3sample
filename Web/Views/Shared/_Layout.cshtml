@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="https://www.google.com/jsapi?key=ABQIAAAAzlUhatB0abMgXyeRtWskUxT2yXp_ZAY8_ufC3CFXhHIE1NvwkxS6SOahk5_K4ALLzK_r2kzquv5ngw" type="text/javascript"></script>
+    <script type="text/javascript">
+        google.load("jquery", "1.5.1", { uncompressed: true });
+        google.load("jqueryui", "1.8.10", { uncompressed: true });
+    </script>
+    <link href="@Url.Content("~/public/stylesheets/application.css")" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="title">
+                <h1>My MVC Application</h1>
+            </div>
+
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")                
+            </div>
+
+            <div id="menucontainer">
+
+                <ul id="menu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="main">
+            @RenderBody()
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
