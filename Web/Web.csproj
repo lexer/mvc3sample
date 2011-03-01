@@ -114,6 +114,9 @@
       <DependentUpon>mvcsample.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="public\javascripts\application.js" />
+    <Content Include="public\javascripts\require.js" />
+    <Content Include="public\javascripts\views\products\index.js" />
     <Content Include="public\stylesheets\application.css" />
     <Content Include="public\stylesheets\ie.css" />
     <Content Include="public\stylesheets\print.css" />
@@ -138,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.rb" />
