@@ -4,10 +4,7 @@ namespace Web.Repositories
 
     using Domain;
 
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
-        IEnumerable<Product> GetAll();
-
-        void Save(Product product);
     }
 }

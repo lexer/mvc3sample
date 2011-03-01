@@ -2,6 +2,6 @@
 {
     public abstract class EntityBase
     {
-        public virtual int Id { get; private set; }
+        public virtual int Id { get;  set; }
     }
 }

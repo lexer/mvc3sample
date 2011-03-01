@@ -4,8 +4,7 @@ namespace Web.Repositories
 
     using Domain;
 
-    public interface ICategoryRepository
-    {
-        IEnumerable<Category> GetAll();
+    public interface ICategoryRepository :IRepository<Category>
+    { 
     }
 }

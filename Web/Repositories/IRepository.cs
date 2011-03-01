@@ -4,8 +4,14 @@ namespace Web.Repositories
 
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
+        IEnumerable<T> All();
 
         void Save(T entity);
+
+        T Find(int id);
+
+        void Update(T entity);
+
+        void Delete(T entity);
     }
 }

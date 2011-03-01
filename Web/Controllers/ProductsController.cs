@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Web.Controllers
+﻿namespace Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     using Domain;
@@ -17,7 +13,8 @@ namespace Web.Controllers
 
         private readonly ICategoryRepository categoryRepository;
 
-        public ProductsController(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public ProductsController(IProductRepository productRepository,
+            ICategoryRepository categoryRepository)
         {
             this.productRepository = productRepository;
             this.categoryRepository = categoryRepository;
@@ -25,26 +22,52 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Products = productRepository.GetAll();
+            this.ViewBag.Products = this.productRepository.All();
             return this.View();
         }
 
         public ActionResult New()
         {
-            ViewBag.Categories = categoryRepository.GetAll() ?? new List<Category>();
-            return this.View( new Product());
+            this.ViewBag.Categories = this.categoryRepository.All();
+            return this.View(new Product());
         }
 
         [HttpPost]
         public ActionResult Create(Product product)
-        {   
-            productRepository.Save(product);
-            return this.RedirectToAction("Index");
+        {
+            if (this.ModelState.IsValid)
+            {
+                this.productRepository.Save(product);
+                return this.RedirectToAction("Index"); 
+            }
+            return this.View("New", product); 
         }
 
-//        public ActionResult Edit(int id)
-//        {
-//             
-//        }
+        public ActionResult Edit(int id)
+        {
+            return this.View(this.productRepository.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult Update(Product model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var product = productRepository.Find(model.Id);
+                this.UpdateModel(product);
+
+                this.productRepository.Update(product);
+                return this.RedirectToAction("Index");
+            }
+
+            return this.View("Edit",model); 
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var model = productRepository.Find(id);
+            productRepository.Delete(model);
+            return this.RedirectToAction("Index");
+        }
     }
 }

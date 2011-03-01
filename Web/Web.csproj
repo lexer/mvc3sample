@@ -147,6 +147,8 @@
     <None Include="scss\application.scss" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\New.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\_Form.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

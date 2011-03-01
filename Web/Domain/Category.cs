@@ -5,7 +5,6 @@ namespace Web.Domain
     public class Category: EntityBase
     {
         public virtual string Name { get; set; }
-
         public virtual IList<Product> Products { get; private set; }
 
         public Category()

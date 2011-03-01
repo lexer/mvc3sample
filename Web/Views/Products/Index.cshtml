@@ -19,7 +19,10 @@
                     @item.Description
                 </td>
                 <td>
-                   @Html.ActionLink("Edit", "Edit") 
+                   @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) 
+                </td>
+                <td>
+                   @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
                 </td>
             </tr>
         }
