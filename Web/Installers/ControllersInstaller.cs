@@ -19,7 +19,7 @@ namespace Web.Installers
 		{
 			container.Register(AllTypes.FromThisAssembly()
 			                   	.BasedOn<IController>()
-                                .If(Component.IsInSameNamespaceAs<HomeController>())
+                                .If(Component.IsInSameNamespaceAs<ProductsController>())
 			                   	.If(t => t.Name.EndsWith("Controller"))
 			                   	.Configure((c => c.LifeStyle.Transient)));
 		}

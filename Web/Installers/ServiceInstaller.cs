@@ -17,7 +17,7 @@ namespace Web.Installers
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
 			container.Register(AllTypes.FromThisAssembly().Pick()
-			                   	.If(Castle.MicroKernel.Registration.Component.IsInSameNamespaceAs<CategoryService>())
+			                   	.If(Castle.MicroKernel.Registration.Component.IsInSameNamespaceAs<SomeService>())
 			                   	.Configure(c => c.LifeStyle.Transient)
 			                   	.WithService.DefaultInterface());
 		}

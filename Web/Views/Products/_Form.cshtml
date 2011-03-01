@@ -1,11 +1,7 @@
 ﻿@using Web.Domain;
 @model Product
 @{
-    var action = "Update";
-    if (Model.Id == 0)
-    {
-        action = "Create";
-    }
+    var action = Model.Id == 0 ? "Create" : "Update";
 }
 @using (Html.BeginForm(action, "Products"))
 {
@@ -20,7 +16,6 @@
         @Html.LabelFor(model => model.Description) :
         @Html.TextBoxFor(model => model.Description)
         <br />
-        @*          <br />*@ @*          @Html.LabelFor(model => model.Category) :*@ @*          @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.Categories, "CollectionTypeId", "Title"))*@
         <input type="submit" value="Submit" />
     </fieldset>
 }

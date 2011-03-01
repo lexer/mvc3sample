@@ -1,6 +1,6 @@
 namespace Web.Services
 {
-    public interface ICategoryService
+    public interface ISomeService
     {
     }
 }
