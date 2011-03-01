@@ -59,8 +59,7 @@ namespace Web.Plumbing
 		protected virtual void ConfigurePersistence(Configuration config)
 		{
 			SchemaMetadataUpdater.QuoteTableAndColumns(config);
-        //    new SchemaExport(config)
-          // .Create(false, true);
+            //new SchemaExport(config).Create(false, true);
 
 		}
 
