@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Products";
+}
+@Html.ActionLink("Create", "New")
+<h2>
+    Product List</h2>
+<table>
+    <tbody>
+        @foreach (var item in ViewBag.Products)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                   @Html.ActionLink("Edit", "Edit") 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

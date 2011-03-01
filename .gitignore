@@ -65,6 +65,10 @@ stylecop.*
 *.dbmdl
 Generated_Code #added for RIA/Silverlight projects
 
-#Sass
+# Sass
 
 .sass-cache*
+
+# DataBase
+
+App_Data*
