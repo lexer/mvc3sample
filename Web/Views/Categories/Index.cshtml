@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Categories";
+}
+@Html.ActionLink("Create", "New")
+<h2>
+    Category List</h2>
+<table>
+    <tbody>
+        @foreach (var item in ViewBag.Categories)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                   @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) 
+                </td>
+                <td>
+                   @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

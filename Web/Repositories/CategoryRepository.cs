@@ -15,5 +15,6 @@ namespace Web.Repositories
             : base(session)
         {
         }
+
     }
 }

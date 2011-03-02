@@ -16,6 +16,8 @@
         @Html.LabelFor(model => model.Description) :
         @Html.TextBoxFor(model => model.Description)
         <br />
-        <input type="submit" value="Submit" class="button" />
+        @Html.LabelFor(model => model.Category) :
+        @Html.DropDownListFor(model => model.Category.Id, new SelectList(ViewBag.Categories,"Id", "Name"))
+        <input type="submit" value="Submit" />
     </fieldset>
 }
