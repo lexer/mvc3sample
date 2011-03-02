@@ -4,3 +4,35 @@
 @import "compass/css3/text-shadow";
 @import "compass/css3/inline-block";
 @import "compass/utilities/general/clearfix";
+
+
+input 
+
+.button, button:visited  {
+    @include border-radius(5px);
+    @include box-shadow(rgba(0, 0, 0, 0.5), 0px, 1px, 3px, 0px);
+    background:url("../images/alert-overlay.png") repeat-x scroll 0px -1px #222222;
+
+    border: 1px solid #999999;
+    color:#FFFFFF;
+    cursor:pointer;
+    display:inline-block;
+    padding:5px 10px 6px;
+    position:relative;
+    text-decoration:none;
+    @include text-shadow(rgba(0, 0, 0, 0.5), 0px, -1px, 1px);
+}
+
+.button::-moz-focus-inner {
+    border:0 none;
+    padding:0;
+}
+
+.button:hover {
+    background-color:#111111;
+    color:#FFFFFF;
+}
+
+.button:active {
+    top:1px;
+}

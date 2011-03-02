@@ -118,7 +118,9 @@
       <DependentUpon>mvcsample.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="public\images\alert-overlay.png" />
     <Content Include="public\javascripts\application.js" />
+    <Content Include="public\javascripts\main.js" />
     <Content Include="public\javascripts\require.js" />
     <Content Include="public\javascripts\views\products\index.js" />
     <Content Include="public\stylesheets\application.css" />
@@ -136,9 +138,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="public\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="config.rb" />
     <None Include="scss\ie.scss" />
@@ -173,8 +173,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2641</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
