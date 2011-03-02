@@ -6,5 +6,6 @@ namespace Web.Repositories
 
     public interface IProductRepository : IRepository<Product>
     {
+        IEnumerable<Product> AllWithCategory();
     }
 }

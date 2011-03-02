@@ -12,6 +12,8 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Web.Plumbing
 {
+    using Castle.Facilities.TypedFactory;
+
     using Domain;
 
     public class PersistenceFacility : AbstractFacility
@@ -20,12 +22,14 @@ namespace Web.Plumbing
 		{
 			var config = BuildDatabaseConfiguration();
 
-			Kernel.Register(
-				Component.For<ISessionFactory>()
-					.UsingFactoryMethod(config.BuildSessionFactory),
-				Component.For<ISession>()
-					.UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
-					.LifeStyle.PerWebRequest);
+		    Kernel.Register(
+		        Component.For<ISessionFactory>()
+		            .UsingFactoryMethod(config.BuildSessionFactory),
+		        Component.For<ISession>()
+		            .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
+		            .LifeStyle.PerWebRequest,
+		        Component.For<Func<ISession>>().AsFactory().LifeStyle.Transient);
+
 		}
 
 		private Configuration BuildDatabaseConfiguration()

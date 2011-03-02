@@ -1,6 +1,12 @@
 namespace Web.Plumbing
 {
+    using System;
+    using System.ComponentModel;
     using System.Web.Mvc;
+
+    using Domain;
+
+    using Repositories;
 
     public class SmartBinder : DefaultModelBinder
     {
@@ -11,18 +17,36 @@ namespace Web.Plumbing
             this._filteredModelBinders = filteredModelBinders;
         }
 
-        public override object BindModel(ControllerContext controllerContext,ModelBindingContext bindingContext)
+//        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+//        {
+//            foreach (IFilteredModelBinder modelBinder in this._filteredModelBinders)
+//            {
+//                if (modelBinder.IsMatch(bindingContext.ModelType))
+//                {
+//                    return modelBinder.BindModel(
+//                        controllerContext,
+//                        bindingContext);
+//                }
+//            }
+//            return base.BindModel(controllerContext, bindingContext);
+//        }
+
+        protected override void SetProperty(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext,
+            PropertyDescriptor propertyDescriptor,
+            object value)
         {
-            foreach (IFilteredModelBinder modelBinder in this._filteredModelBinders)
+            var resultValue = value;
+            if (typeof(EntityBase).IsAssignableFrom(propertyDescriptor.PropertyType))
             {
-                if (modelBinder.IsMatch(bindingContext.ModelType))
-                {
-                    return modelBinder.BindModel(
-                        controllerContext,
-                        bindingContext);
-                }
+                Type repositoryType = typeof(IRepository<>).MakeGenericType(bindingContext.ModelType);
+                var repository = (IRepository)DependencyResolver.Current.GetService(repositoryType);
+                var model = (EntityBase)value;
+                resultValue = repository.Find(model.Id);
             }
-            return base.BindModel(controllerContext, bindingContext);
+
+            base.SetProperty(controllerContext, bindingContext, propertyDescriptor, resultValue);
         }
     }
 }

@@ -2,8 +2,11 @@
     ViewBag.Title = "Categories";
 }
 @Html.ActionLink("Create", "New")
-<h2>
-    Category List</h2>
+<div id="category-form-dialog">
+    
+</div>
+
+<h2>Category List</h2>
 <table>
     <tbody>
         @foreach (var item in ViewBag.Categories)

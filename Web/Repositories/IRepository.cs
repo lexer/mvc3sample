@@ -6,7 +6,7 @@ namespace Web.Repositories
 
     using FluentNHibernate.Data;
 
-    public interface IRepository<T>
+    public interface IRepository<T> 
     {
         IEnumerable<T> All();
 
@@ -18,10 +18,4 @@ namespace Web.Repositories
 
         void Delete(T entity);
     }
-
-    public interface IRepository
-    {
-        EntityBase Find(int id);
-    }
-
 }

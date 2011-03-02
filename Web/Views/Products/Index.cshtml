@@ -19,6 +19,12 @@
                     @item.Description
                 </td>
                 <td>
+                    @if (item.Category != null)
+                    {
+                        @item.Category.Name    
+                    }
+                </td>
+                <td>
                    @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) 
                 </td>
                 <td>

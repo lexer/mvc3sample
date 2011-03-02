@@ -11,8 +11,8 @@ namespace Web.Repositories
 
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        public CategoryRepository(ISession session)
-            : base(session)
+        public CategoryRepository(Func<ISession> sessionFunc)
+            : base(sessionFunc)
         {
         }
 

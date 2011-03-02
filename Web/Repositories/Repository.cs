@@ -1,49 +1,56 @@
 namespace Web.Repositories
 {
+    using System;
     using System.Collections.Generic;
 
     using Domain;
 
-    using FluentNHibernate.Data;
-
     using NHibernate;
 
-    public class Repository<T> : IRepository<T>, IRepository
+    public class Repository<T> : IRepository<T>
         where T : EntityBase
     {
-        private readonly ISession session;
+        private readonly Func<ISession> sessionFunc;
 
-        public Repository(ISession session)
+        public Repository(Func<ISession> sessionFunc)
         {
-            this.session = session;
+            this.sessionFunc = sessionFunc;
         }
 
         #region IRepository<T> Members
 
         public IEnumerable<T> All()
         {
-            using (ITransaction tx = this.session.BeginTransaction())
+            ISession session = this.GetSession();
+            using (ITransaction tx = session.BeginTransaction())
             {
-                var result = this.session.QueryOver<T>().Future();
+                IEnumerable<T> result = session.QueryOver<T>().Future();
                 tx.Commit();
                 return result;
             }
         }
 
+        protected ISession GetSession() 
+        {
+            return this.sessionFunc();
+        }
+
         public void Save(T entity)
         {
-            using (ITransaction tx = this.session.BeginTransaction())
+            ISession session = this.GetSession();
+            using (ITransaction tx = session.BeginTransaction())
             {
-                this.session.Save(entity);
+                session.Save(entity);
                 tx.Commit();
             }
         }
 
         public T Find(int id)
         {
-            using (ITransaction tx = this.session.BeginTransaction())
+            ISession session = this.GetSession();
+            using (ITransaction tx = session.BeginTransaction())
             {
-                var result = this.session.Get<T>(id);
+                var result = session.Get<T>(id);
                 tx.Commit();
                 return result;
             }
@@ -51,32 +58,26 @@ namespace Web.Repositories
 
         public void Update(T entity)
         {
-            using (ITransaction tx = this.session.BeginTransaction())
+            ISession session = this.GetSession();
+            using (ITransaction tx = session.BeginTransaction())
             {
-                this.session.Update(entity);
+                session.Update(entity);
                 tx.Commit();
             }
         }
 
         public void Delete(T entity)
         {
-            using (ITransaction tx = this.session.BeginTransaction())
+            ISession session = this.GetSession();
+            using (ITransaction tx = session.BeginTransaction())
             {
-                this.session.Delete(entity);
+                session.Delete(entity);
                 tx.Commit();
             }
         }
 
         #endregion
 
-        protected ISession GetSession()
-        {
-            return this.session;
-        }
-
-        EntityBase IRepository.Find(int id)
-        {
-            return Find(id);
-        }
+       
     }
 }

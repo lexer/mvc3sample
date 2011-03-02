@@ -3,7 +3,11 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    using AutoMapper;
+
     using Domain;
+
+    using Models;
 
     using Repositories;
 
@@ -22,22 +26,22 @@
 
         public ActionResult Index()
         {
-            this.ViewBag.Products = this.productRepository.All();
+            this.ViewBag.Products = this.productRepository.AllWithCategory();
             return this.View();
         }
 
         public ActionResult New()
         {
             this.ViewBag.Categories = this.categoryRepository.All();
-            return this.View(new Product());
+            return this.View(new ProductInput());
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(ProductInput product)
         {
             if (this.ModelState.IsValid)
             {
-                this.productRepository.Save(product);
+                this.productRepository.Save(Mapper.Map(product, new Product()));
                 return this.RedirectToAction("Index"); 
             }
             return this.View("New", product); 
@@ -46,19 +50,16 @@
         public ActionResult Edit(int id)
         {
             this.ViewBag.Categories = this.categoryRepository.All();
-            return this.View(this.productRepository.Find(id));
+            return this.View( Mapper.Map(this.productRepository.Find(id), new ProductInput()));
         }
 
         [HttpPost]
-        public ActionResult Update(Product model)
+        public ActionResult Update(ProductInput model)
         {
             if (this.ModelState.IsValid)
             {
                 var product = productRepository.Find(model.Id);
-//                var category = categoryRepository.Find(model.Category.Id);
-//                product.Category = category;
-                this.UpdateModel(product);
-                this.productRepository.Update(product);
+                this.productRepository.Update(Mapper.Map(model, product));
                 return this.RedirectToAction("Index");
             }
 

@@ -7,6 +7,8 @@ using System.Web.Routing;
 
 namespace Web
 {
+    using Castle.Facilities.FactorySupport;
+    using Castle.Facilities.TypedFactory;
     using Castle.Windsor;
     using Castle.Windsor.Installer;
 
@@ -39,7 +41,10 @@ namespace Web
         private static void BootstrapContainer()
         {
             container = new WindsorContainer()
+                .AddFacility<FactorySupportFacility>()
+                .AddFacility<TypedFactoryFacility>()
                 .Install(FromAssembly.This());
+
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
             
@@ -52,7 +57,7 @@ namespace Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
            
-            ModelBinders.Binders.DefaultBinder = new SmartBinder(new EntityModelBinder());
+          //  ModelBinders.Binders.DefaultBinder = new SmartBinder(new EntityModelBinder());
             BootstrapContainer();
         }
 
