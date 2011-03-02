@@ -72,3 +72,7 @@ Generated_Code #added for RIA/Silverlight projects
 # DataBase
 
 App_Data*
+
+# WebStorm
+
+.idea*

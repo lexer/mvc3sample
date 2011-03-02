@@ -57,3 +57,44 @@ q:before, q:after, blockquote:before, blockquote:after {
 a img {
   border: none;
 }
+
+/* line 11, ../../scss/application.scss */
+input
+.button, button:visited {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px;
+  -o-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px;
+  background: url("../images/alert-overlay.png") repeat-x scroll 0px -1px #222222;
+  border: 1px solid #999999;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  position: relative;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px;
+}
+
+/* line 26, ../../scss/application.scss */
+.button::-moz-focus-inner {
+  border: 0 none;
+  padding: 0;
+}
+
+/* line 31, ../../scss/application.scss */
+.button:hover {
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+/* line 36, ../../scss/application.scss */
+.button:active {
+  top: 1px;
+}
