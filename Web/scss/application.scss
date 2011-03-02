@@ -5,8 +5,10 @@
 @import "compass/css3/inline-block";
 @import "compass/utilities/general/clearfix";
 
-
-input 
+body {
+	font-family: Arial;
+	font-size: 14px;
+}
 
 .button, button:visited  {
     @include border-radius(5px);

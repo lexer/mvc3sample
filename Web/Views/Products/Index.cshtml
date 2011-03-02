@@ -1,7 +1,14 @@
 ﻿@{
     ViewBag.Title = "Products";
+    
 }
-@Html.ActionLink("Create", "New")
+<div id="product-form-dialog">
+        
+</div>
+
+
+<a id="add-new-product-btn" href="#" data-action="@Url.Action("New")">Add new product</a>
+
 <h2>
     Product List</h2>
 <table>
@@ -25,7 +32,7 @@
                     }
                 </td>
                 <td>
-                   @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) 
+                    <a class="edit-product-btn" href="#" data-action="@Url.Action("Edit", new { id = item.Id })">Edit</a>
                 </td>
                 <td>
                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
@@ -35,12 +42,11 @@
     </tbody>
 </table>
 
-@*<div id="message" data-message="John Doe"></div>*@
-@**@
-@*<script type="text/javascript">*@
-@*    require(["views/products/index"], function (index) {*@
-@*        $(function () {*@
-@*            index.init();*@
-@*        });*@
-@*    });*@
-@*</script>*@
+
+<script type="text/javascript">
+    require(["views/products/index"], function (index) {
+        $(function () {
+            index.init();
+        });
+    });
+</script>

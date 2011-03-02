@@ -1,6 +1,5 @@
 ﻿namespace Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -11,13 +10,16 @@
 
     using Repositories;
 
+    #region Nested type: ProductsController
+
     public class ProductsController : Controller
     {
-        private readonly IProductRepository productRepository;
-
         private readonly ICategoryRepository categoryRepository;
 
-        public ProductsController(IProductRepository productRepository,
+        private readonly IProductRepository productRepository;
+
+        public ProductsController(
+            IProductRepository productRepository,
             ICategoryRepository categoryRepository)
         {
             this.productRepository = productRepository;
@@ -42,15 +44,16 @@
             if (this.ModelState.IsValid)
             {
                 this.productRepository.Save(Mapper.Map(product, new Product()));
-                return this.RedirectToAction("Index"); 
+                return this.Json(new { Success = true });
             }
-            return this.View("New", product); 
+            this.ViewBag.Categories = this.categoryRepository.All();
+            return this.Json(new { View = this.RenderPartialViewToString("New", product), Success = false });
         }
 
         public ActionResult Edit(int id)
         {
             this.ViewBag.Categories = this.categoryRepository.All();
-            return this.View( Mapper.Map(this.productRepository.Find(id), new ProductInput()));
+            return this.View(Mapper.Map(this.productRepository.Find(id), new ProductInput()));
         }
 
         [HttpPost]
@@ -58,19 +61,24 @@
         {
             if (this.ModelState.IsValid)
             {
-                var product = productRepository.Find(model.Id);
+                Product product = this.productRepository.Find(model.Id);
                 this.productRepository.Update(Mapper.Map(model, product));
-                return this.RedirectToAction("Index");
+                return this.Json(new { Success = true });
             }
-
-            return this.View("Edit",model); 
+            this.ViewBag.Categories = this.categoryRepository.All();
+           
+            return this.Json(new { View = this.RenderPartialViewToString("Edit", model), Success = false });
+             
         }
 
         public ActionResult Delete(int id)
         {
-            var model = productRepository.Find(id);
-            productRepository.Delete(model);
+            Product model = this.productRepository.Find(id);
+            this.productRepository.Delete(model);
             return this.RedirectToAction("Index");
         }
     }
+
+    #endregion
 }
+

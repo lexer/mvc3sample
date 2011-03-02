@@ -13,8 +13,7 @@ namespace Web.Installers
 			container.Register(AllTypes.FromThisAssembly()
 								.Where(Component.IsInSameNamespaceAs<CategoryRepository>())
 								.WithService.DefaultInterface()
-								.Configure(c => c.LifeStyle.Transient
-			                   					.DependsOn(new { pageSize = 20 })));
+								.Configure(c => c.LifeStyle.Transient));
 		}
 	}
 }

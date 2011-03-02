@@ -7,8 +7,12 @@
 {
     <fieldset>
         @Html.HiddenFor(model => Model.Id)
-        @Html.LabelFor(model => Model.Name) :
+        <div>
+        @Html.LabelFor(model => Model.Name) 
+        </div>
+        <div>
         @Html.TextBoxFor(model => model.Name) 
+        </div>
         <input type="submit" value="Submit" />
     </fieldset>
 }

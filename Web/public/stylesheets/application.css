@@ -58,8 +58,13 @@ a img {
   border: none;
 }
 
-/* line 11, ../../scss/application.scss */
-input
+/* line 8, ../../scss/application.scss */
+body {
+  font-family: Arial;
+  font-size: 14px;
+}
+
+/* line 13, ../../scss/application.scss */
 .button, button:visited {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -82,19 +87,19 @@ input
   text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 1px;
 }
 
-/* line 26, ../../scss/application.scss */
+/* line 28, ../../scss/application.scss */
 .button::-moz-focus-inner {
   border: 0 none;
   padding: 0;
 }
 
-/* line 31, ../../scss/application.scss */
+/* line 33, ../../scss/application.scss */
 .button:hover {
   background-color: #111111;
   color: #FFFFFF;
 }
 
-/* line 36, ../../scss/application.scss */
+/* line 38, ../../scss/application.scss */
 .button:active {
   top: 1px;
 }

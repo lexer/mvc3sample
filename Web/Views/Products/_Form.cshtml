@@ -2,23 +2,41 @@
 @using Web.Models;
 @model ProductInput
 @{
+    
     var action = Model.Id == 0 ? "Create" : "Update";
 }
-@using (Html.BeginForm(action, "Products"))
+@using (Html.BeginForm(action, "Products", FormMethod.Post, new { id = "product-form" }))
 {
+    @Html.ValidationSummary(true, "Product is not valid")
     <fieldset>
         @Html.HiddenFor(model => Model.Id)
-        @Html.LabelFor(model => Model.Name) :
-        @Html.TextBoxFor(model => model.Name)
-        <br />
-        @Html.LabelFor(model => model.Price) :
-        @Html.TextBoxFor(model => model.Price)
-        <br />
-        @Html.LabelFor(model => model.Description) :
-        @Html.TextBoxFor(model => model.Description)
-        <br />
-        @Html.LabelFor(model => model.CategoryId) :
-        @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories,"Id", "Name"))
-        <input type="submit" value="Submit" />
+        <div>
+            @Html.LabelFor(model => Model.Name)
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Price)
+            @Html.ValidationMessageFor(m => m.Price)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.CategoryId)
+        </div>
+        <div>
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "Id", "Name"))
+        </div>
+        <input type="submit" value="Submit" class="button" />
     </fieldset>
 }

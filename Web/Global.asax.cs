@@ -7,10 +7,14 @@ using System.Web.Routing;
 
 namespace Web
 {
+    using AutoMapper;
+
     using Castle.Facilities.FactorySupport;
     using Castle.Facilities.TypedFactory;
     using Castle.Windsor;
     using Castle.Windsor.Installer;
+
+    using Models;
 
     using Plumbing;
 
@@ -47,7 +51,19 @@ namespace Web
 
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
-            
+
+            Mapper.Initialize(x => GetProfiles().ToList().ForEach(type => x.AddProfile((Profile)container.Resolve(type))));
+            Mapper.AssertConfigurationIsValid();
+
+        }
+
+        private static IEnumerable<Type> GetProfiles()
+        {
+            foreach (Type type in typeof(ProductProfile).Assembly.GetTypes())
+            {
+                if (!type.IsAbstract && typeof(Profile).IsAssignableFrom(type))
+                    yield return type;
+            }
         }
 
         protected void Application_Start()
