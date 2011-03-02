@@ -45,6 +45,7 @@
 
         public ActionResult Edit(int id)
         {
+            this.ViewBag.Categories = this.categoryRepository.All();
             return this.View(this.productRepository.Find(id));
         }
 
@@ -54,8 +55,9 @@
             if (this.ModelState.IsValid)
             {
                 var product = productRepository.Find(model.Id);
+//                var category = categoryRepository.Find(model.Category.Id);
+//                product.Category = category;
                 this.UpdateModel(product);
-
                 this.productRepository.Update(product);
                 return this.RedirectToAction("Index");
             }

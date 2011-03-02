@@ -4,9 +4,11 @@ namespace Web.Repositories
 
     using Domain;
 
+    using FluentNHibernate.Data;
+
     using NHibernate;
 
-    public class Repository<T> : IRepository<T>
+    public class Repository<T> : IRepository<T>, IRepository
         where T : EntityBase
     {
         private readonly ISession session;
@@ -70,6 +72,11 @@ namespace Web.Repositories
         protected ISession GetSession()
         {
             return this.session;
+        }
+
+        EntityBase IRepository.Find(int id)
+        {
+            return Find(id);
         }
     }
 }

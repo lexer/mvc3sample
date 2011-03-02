@@ -2,6 +2,10 @@ namespace Web.Repositories
 {
     using System.Collections.Generic;
 
+    using Domain;
+
+    using FluentNHibernate.Data;
+
     public interface IRepository<T>
     {
         IEnumerable<T> All();
@@ -14,4 +18,10 @@ namespace Web.Repositories
 
         void Delete(T entity);
     }
+
+    public interface IRepository
+    {
+        EntityBase Find(int id);
+    }
+
 }

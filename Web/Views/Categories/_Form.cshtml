@@ -1,0 +1,14 @@
+﻿@using Web.Domain;
+@model Category
+@{
+    var action = Model.Id == 0 ? "Create" : "Update";
+}
+@using (Html.BeginForm(action, "Categories"))
+{
+    <fieldset>
+        @Html.HiddenFor(model => Model.Id)
+        @Html.LabelFor(model => Model.Name) :
+        @Html.TextBoxFor(model => model.Name) 
+        <input type="submit" value="Submit" />
+    </fieldset>
+}
